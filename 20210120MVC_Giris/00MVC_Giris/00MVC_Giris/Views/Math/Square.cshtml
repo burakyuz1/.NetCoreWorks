@@ -1,0 +1,10 @@
+﻿
+<form>
+    <label>Value</label>
+    <input class="form-control" type="text" name="num" />
+    <button class="btn btn-primary mt-2" type="submit">Calculate</button>
+</form>
+
+<h1>RESULT IS READY:</h1>
+@*@{var result = @Math.Pow(@ViewBag.Number,2);}*@
+<p> @ViewBag.Number<sup>2</sup> = <span class="bg-info">@ViewBag.Result</span></p>
