@@ -1,8 +1,18 @@
-﻿@{
+﻿@model ExchangeRate
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome Mate</h1>
     <p>In order to calculate power of one number please  <a asp-controller="Math" asp-action="Square">click here</a> </p>
+
+
+    <h4>1₺ Today's Exchange Rate</h4>
+    <ul class="list-group">
+        <li class="list-group-item">Dollar: @Model.Dollars</li>
+        <li class="list-group-item">Euro: @Model.Euro</li>
+        <li class="list-group-item">Gold: @Model.Gold</li>
+    </ul>
 </div>

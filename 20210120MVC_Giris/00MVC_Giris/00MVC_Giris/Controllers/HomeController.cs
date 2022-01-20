@@ -1,11 +1,7 @@
 ﻿using _00MVC_Giris.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace _00MVC_Giris.Controllers
 {
@@ -20,7 +16,13 @@ namespace _00MVC_Giris.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            ExchangeRate exchangeRate = new ExchangeRate()
+            {
+                Dollars = 13.50m,
+                Euro = 15.23m,
+                Gold = 796.21m
+            };
+            return View(exchangeRate);
         }
 
         public IActionResult Privacy()

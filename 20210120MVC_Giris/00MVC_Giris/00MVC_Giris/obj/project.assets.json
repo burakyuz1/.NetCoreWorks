@@ -741,11 +741,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Burak Akyüz\\Desktop\\WeAreTheChampions\\00MVC_Giris\\00MVC_Giris\\00MVC_Giris.csproj",
+      "projectUniqueName": "C:\\Users\\Burak Akyüz\\Desktop\\Repo\\.NET MVC Core\\20210120MVC_Giris\\00MVC_Giris\\00MVC_Giris\\00MVC_Giris.csproj",
       "projectName": "00MVC_Giris",
-      "projectPath": "C:\\Users\\Burak Akyüz\\Desktop\\WeAreTheChampions\\00MVC_Giris\\00MVC_Giris\\00MVC_Giris.csproj",
+      "projectPath": "C:\\Users\\Burak Akyüz\\Desktop\\Repo\\.NET MVC Core\\20210120MVC_Giris\\00MVC_Giris\\00MVC_Giris\\00MVC_Giris.csproj",
       "packagesPath": "C:\\Users\\Burak Akyüz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Burak Akyüz\\Desktop\\WeAreTheChampions\\00MVC_Giris\\00MVC_Giris\\obj\\",
+      "outputPath": "C:\\Users\\Burak Akyüz\\Desktop\\Repo\\.NET MVC Core\\20210120MVC_Giris\\00MVC_Giris\\00MVC_Giris\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Burak Akyüz\\AppData\\Roaming\\NuGet\\NuGet.Config",

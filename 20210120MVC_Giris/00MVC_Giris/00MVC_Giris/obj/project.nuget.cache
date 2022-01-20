@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "y6wh2gpurV5T53q+x8h9dzCmGrhHkO36z4wX1tgNuvH2UWdlovuOkvUCvAK/EtOgpVkMb7GPznqS1WgBnJwPeQ==",
+  "dgSpecHash": "xQQ7a54usbqFZCLKlp2aWGW/6icGcr3yxGwzucHlnKpA+ztiau47cysO0E6u5cYnyPLDcSBksp+7PgjG3wvTfg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Burak Akyüz\\Desktop\\WeAreTheChampions\\00MVC_Giris\\00MVC_Giris\\00MVC_Giris.csproj",
+  "projectFilePath": "C:\\Users\\Burak Akyüz\\Desktop\\Repo\\.NET MVC Core\\20210120MVC_Giris\\00MVC_Giris\\00MVC_Giris\\00MVC_Giris.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Burak Akyüz\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\5.0.12\\microsoft.aspnetcore.mvc.razor.extensions.5.0.12.nupkg.sha512",
     "C:\\Users\\Burak Akyüz\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.runtimecompilation\\5.0.12\\microsoft.aspnetcore.mvc.razor.runtimecompilation.5.0.12.nupkg.sha512",
