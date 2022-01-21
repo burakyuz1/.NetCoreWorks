@@ -1,0 +1,25 @@
+﻿@model KanGrubuMvc.ViewModel.KanGrubuViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+   <h2>Kan Grubu Alış/Veriş</h2>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th></th>
+                @foreach (var item in Model.Vericiler)
+                {
+                    <th>@item.Grup @item.Rh</th>
+                }
+            </tr>
+        </tbody>
+
+    </table>
+
+
+
+</div>
