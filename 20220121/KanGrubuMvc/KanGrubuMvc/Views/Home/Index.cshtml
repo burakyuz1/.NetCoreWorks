@@ -5,17 +5,21 @@
 }
 
 <div class="text-center">
-    <h5>VERİCİLER</h5>
+    <h5>KAN GRUBU KONTROL [MVC]</h5>
 
     <table class="table table-bordered">
         <tbody>
             <tr>
-                <th>ALICILAR</th>
+                <th class="align-middle" rowspan="2">ALICILAR</th>
+                <th colspan="8">VERİCİLER</th>
+            </tr>
+            <tr>
                 @foreach (var item in Model.Vericiler)
                 {
                     <th>@item.Grup @item.Rh</th>
 
                 }
+
             </tr>
             @foreach (var alici in Model.Alicilar)
             {

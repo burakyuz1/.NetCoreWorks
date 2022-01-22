@@ -1,4 +1,5 @@
-﻿using KanGrubuMvc.Models;
+﻿using KanGrubuMvc.BaseClass;
+using KanGrubuMvc.Models;
 using KanGrubuMvc.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,7 @@ namespace KanGrubuMvc.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly KanGrubuViewModel kanGrubuViewModel;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -18,92 +20,71 @@ namespace KanGrubuMvc.Controllers
 
         public IActionResult Index()
         {
-            List<Alici> alicilar = new List<Alici>()
+            //Seed Datas
+            List<KanGrubu> kanGruplari = new List<KanGrubu>()
             {
-                new Alici()
+                new KanGrubu()
                 {
                     Grup = "0",
                     Rh = '-'
                 },
-                new Alici()
+                new KanGrubu()
                 {
                     Grup = "0",
                     Rh = '+'
                 },
-                new Alici()
+                new KanGrubu()
                 {
                     Grup = "A",
                     Rh = '-'
                 },
-                new Alici()
+                new KanGrubu()
                 {
                     Grup = "A",
                     Rh = '+'
                 },
-                new Alici()
+                new KanGrubu()
                 {
                     Grup = "B",
                     Rh = '-'
                 },
-                new Alici()
+                new KanGrubu()
                 {
                     Grup = "B",
                     Rh = '+'
                 },
-                new Alici()
+                new KanGrubu()
                 {
                     Grup = "AB",
                     Rh = '-'
                 },
-                new Alici()
+                new KanGrubu()
                 {
                     Grup = "AB",
                     Rh = '+'
                 }
             };
-            List<Verici> vericiler = new List<Verici>()
+
+
+            List<Alici> alicilar = new List<Alici>();
+            List<Verici> vericiler = new List<Verici>();
+            foreach (var kanGrubu in kanGruplari)
             {
-                new Verici()
+                Alici alici = new Alici()
                 {
-                    Grup = "0",
-                    Rh = '-'
-                },
-                new Verici()
+                    Grup = kanGrubu.Grup,
+                    Rh = kanGrubu.Rh
+                };
+                alicilar.Add(alici);
+
+                Verici verici = new Verici()
                 {
-                    Grup = "0",
-                    Rh = '+'
-                },
-                new Verici()
-                {
-                    Grup = "A",
-                    Rh = '-'
-                },
-                new Verici()
-                {
-                    Grup = "A",
-                    Rh = '+'
-                },
-                new Verici()
-                {
-                    Grup = "B",
-                    Rh = '-'
-                },
-                new Verici()
-                {
-                    Grup = "B",
-                    Rh = '+'
-                },
-                new Verici()
-                {
-                    Grup = "AB",
-                    Rh = '-'
-                },
-                new Verici()
-                {
-                    Grup = "AB",
-                    Rh = '+'
-                }
-            };
+                    Grup = kanGrubu.Grup,
+                    Rh = kanGrubu.Rh
+                };
+                vericiler.Add(verici);
+
+            }
 
             KanGrubuViewModel kanGrubuViewModel = new KanGrubuViewModel()
             {
