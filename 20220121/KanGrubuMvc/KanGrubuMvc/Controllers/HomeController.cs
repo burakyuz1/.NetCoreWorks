@@ -1,13 +1,9 @@
-﻿using KanGrubuMvc.BaseClass;
-using KanGrubuMvc.Models;
+﻿using KanGrubuMvc.Models;
 using KanGrubuMvc.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KanGrubuMvc.Controllers
 {
@@ -26,32 +22,7 @@ namespace KanGrubuMvc.Controllers
             {
                 new Alici()
                 {
-                    Grup = "A",
-                    Rh = '+'
-                },
-                new Alici()
-                {
-                    Grup = "B",
-                    Rh = '+'
-                },
-                new Alici()
-                {
-                    Grup = "AB",
-                    Rh = '+'
-                },
-                new Alici()
-                {
-                    Grup = "A",
-                    Rh = '-'
-                },
-                new Alici()
-                {
-                    Grup = "B",
-                    Rh = '-'
-                },
-                new Alici()
-                {
-                    Grup = "AB",
+                    Grup = "0",
                     Rh = '-'
                 },
                 new Alici()
@@ -61,40 +32,40 @@ namespace KanGrubuMvc.Controllers
                 },
                 new Alici()
                 {
-                    Grup = "0",
+                    Grup = "A",
                     Rh = '-'
+                },
+                new Alici()
+                {
+                    Grup = "A",
+                    Rh = '+'
+                },
+                new Alici()
+                {
+                    Grup = "B",
+                    Rh = '-'
+                },
+                new Alici()
+                {
+                    Grup = "B",
+                    Rh = '+'
+                },
+                new Alici()
+                {
+                    Grup = "AB",
+                    Rh = '-'
+                },
+                new Alici()
+                {
+                    Grup = "AB",
+                    Rh = '+'
                 }
             };
             List<Verici> vericiler = new List<Verici>()
             {
                 new Verici()
                 {
-                    Grup = "A",
-                    Rh = '+'
-                },
-                new Verici()
-                {
-                    Grup = "B",
-                    Rh = '+'
-                },
-                new Verici()
-                {
-                    Grup = "AB",
-                    Rh = '+'
-                },
-                new Verici()
-                {
-                    Grup = "A",
-                    Rh = '-'
-                },
-                new Verici()
-                {
-                    Grup = "B",
-                    Rh = '-'
-                },
-                new Verici()
-                {
-                    Grup = "AB",
+                    Grup = "0",
                     Rh = '-'
                 },
                 new Verici()
@@ -104,8 +75,33 @@ namespace KanGrubuMvc.Controllers
                 },
                 new Verici()
                 {
-                    Grup = "0",
+                    Grup = "A",
                     Rh = '-'
+                },
+                new Verici()
+                {
+                    Grup = "A",
+                    Rh = '+'
+                },
+                new Verici()
+                {
+                    Grup = "B",
+                    Rh = '-'
+                },
+                new Verici()
+                {
+                    Grup = "B",
+                    Rh = '+'
+                },
+                new Verici()
+                {
+                    Grup = "AB",
+                    Rh = '-'
+                },
+                new Verici()
+                {
+                    Grup = "AB",
+                    Rh = '+'
                 }
             };
 
@@ -114,8 +110,6 @@ namespace KanGrubuMvc.Controllers
                 Alicilar = alicilar,
                 Vericiler = vericiler
             };
-  
-        
             return View(kanGrubuViewModel);
         }
 

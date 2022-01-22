@@ -4,6 +4,5 @@ namespace KanGrubuMvc.Models
 {
     public class Verici : KanGrubu
     {
-
     }
 }

@@ -5,17 +5,69 @@
 }
 
 <div class="text-center">
-   <h2>Kan Grubu Alış/Veriş</h2>
+    <h5>VERİCİLER</h5>
 
-    <table class="table">
+    <table class="table table-bordered">
         <tbody>
             <tr>
-                <th></th>
+                <th>ALICILAR</th>
                 @foreach (var item in Model.Vericiler)
                 {
                     <th>@item.Grup @item.Rh</th>
+
                 }
             </tr>
+            @foreach (var alici in Model.Alicilar)
+            {
+                <tr>
+                    <th>@alici.Grup @alici.Rh</th>
+                    @foreach (var verici in Model.Vericiler)
+                    {
+                        if (verici.Grup == "0") //0 Genel Vericidir.
+                        {
+                            if (verici.Rh == '-') // negatifi herkese verir
+                            {
+                                <td> <i class="fas fa-check text-success"></i>  </td>
+                            }
+                            else if (verici.Rh == alici.Rh) // ama pozitifse sadece pozitife verir.
+                            {
+                                <td><i class="fas fa-check text-success"></i> </td>
+                            }
+                            else // verici pozitif ve alici negatifse veremez.
+                            {
+                                <td><i class="fas fa-times text-danger"></i></td>
+                            }
+
+                        }
+                        else
+                        {
+
+                            if (verici.Rh == '-') //verici negatif ise harfi uyuşan herkese verir.
+                            {
+                                if (alici.Grup.Contains(verici.Grup))
+                                {
+                                    <td><i class="fas fa-check text-success"></i> </td>
+                                }
+                                else
+                                {
+                                    <td><i class="fas fa-times text-danger"></i></td>
+                                }
+                            }
+                            else //verici pozitif ise sadece pozitif ve harfi uyuşana verir.
+                            {
+                                if (alici.Rh == '+' && alici.Grup.Contains(verici.Grup))
+                                {
+                                    <td><i class="fas fa-check text-success"></i> </td>
+                                }
+                                else
+                                {
+                                    <td><i class="fas fa-times text-danger"></i></td>
+                                }
+                            }
+                        }
+                    }
+                </tr>
+            }
         </tbody>
 
     </table>
