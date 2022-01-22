@@ -5,5 +5,6 @@
         public decimal Dollars { get; set; }
         public decimal Euro { get; set; }
         public decimal Gold { get; set; }
+
     }
 }

@@ -18,5 +18,6 @@ namespace _00MVC_Giris.Controllers
 
             return View();
         }
-    }
+
+  }
 }
