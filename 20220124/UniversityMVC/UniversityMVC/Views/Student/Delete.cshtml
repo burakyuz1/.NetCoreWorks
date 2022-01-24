@@ -1,0 +1,14 @@
+﻿@model Student
+@{
+    ViewData["title"] = "Confirm Delete";
+}
+
+<h1>Confirm Delete</h1>
+
+
+<form asp-controller="Students" asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <p>The student <strong>"@Model.Name @Model.LastName"</strong> will be deleted. Are you sure?</p>
+    <button class="btn btn-primary" asp-route-id="@Model.Id">Yes, Delete</button>
+    <button class="btn btn-secondary" asp-action="Index">No, Cancel</button>
+</form>

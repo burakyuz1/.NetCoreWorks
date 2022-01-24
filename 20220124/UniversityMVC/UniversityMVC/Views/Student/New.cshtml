@@ -1,0 +1,23 @@
+﻿@model Student
+@{
+    ViewData["Title"] = "New Student";
+}
+
+<h1>New Student</h1>
+
+
+<form asp-controller="Student" asp-action="New" method="post"> @*Default olarak kendine post eder.*@
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input class="form-control" type="text" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input class="form-control" type="text" asp-for="LastName" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+     <button class="btn btn-primary mt-3">Add</button>
+    <button asp-action="index"  class="btn btn-secondary mt-3">Cancel</button>
+</form>
