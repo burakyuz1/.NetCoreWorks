@@ -1,0 +1,45 @@
+﻿@model List<Book>
+@{
+    TempData["Title"] = "Book List";
+}
+
+<div class="d-flex justify-content-between align-items-center">
+<h5 class="display-4 d-inline">Book list of <strong>Library</strong></h5>
+<a asp-action="New" asp-controller="Library"  class="btn btn-outline-primary"><i class="fas fa-plus"></i> Add a book</a>
+</div>
+
+<table class="table table-bordered mt-4">  
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Publish Year</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Book book in Model)
+       {
+           <tr>
+               <td>@book.Id</td>
+               <td>@book.BookName</td>
+               <td>@book.BookAuthor</td>
+               <td>@book.BookPublishYear</td>
+               <td>@book.Description</td>
+               <td>
+                   <div class="d-flex">
+                    <a title="Edit" asp-action="Edit" asp-route-id=@book.Id class="btn btn-success mr-2 text-light btn-sm"><i class="fas fa-edit"></i></a> 
+                    <a title="Delete" asp-action="Delete" asp-route-id=@book.Id class="btn btn-danger text-light btn-sm"><i class="fas fa-trash"></i></a>
+
+                   </div>
+               </td>
+           </tr>
+       }
+    </tbody>
+
+
+</table>
+
+
