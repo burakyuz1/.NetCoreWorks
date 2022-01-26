@@ -1,0 +1,43 @@
+﻿
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Site ile ilgili açıklama">
+    <meta name="author" content="Boost5 Burak :DD">
+    <title>Starter Template · Bootstrap v5.1</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="col-lg-8 mx-auto p-3 py-md-5">
+        <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+            @await Html.PartialAsync("_MarkaPartial")
+            <a asp-controller="Home" asp-action="Index" class="nav-link text-dark fs-4">Home</a>
+            <a asp-controller="Home" asp-action="Privacy" class="nav-link text-dark fs-4">Privacy</a>
+
+            <div class="ms-auto">
+                @await RenderSectionAsync("SagUst",false)
+            </div>
+        </header>
+
+        <main>
+            @RenderBody()
+        </main>
+        <footer class="pt-5 my-5 text-muted border-top">
+            Created by the Bootstrap team &middot; &copy; 2021
+        </footer>
+    </div>
+
+
+    <script scr="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/js/site.js"></script>
+    @await RenderSectionAsync("scripts",false)
+</body>
+</html>
