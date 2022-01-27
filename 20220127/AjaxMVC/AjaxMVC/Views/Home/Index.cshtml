@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<hr />
+
+
+<form itemid="frmHava">
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="sehirAd">Şehir Adı:</label>
+                <input type="text" id="sehirAd" class="form-control w-50" required />
+            </div>
+            <button class="btn btn-primary" >Hava Durumunu Öğren</button>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+</form>
+<br /><br />
+<button id="btnZarAt">Zar At</button> Gelen Zar:<span id="zar"></span>
+<br />
+<br />
+<button id="ciftZarAt">Cift Zar At</button> Gelen Zarlar:<span id="ciftZarlar"></span>
+
+@section Scripts{
+<script>
+    $("#btnZarAt").click(function(){
+
+        $.ajax({
+            type:"get",
+            url:"@Url.Action("Zar","Rastgele")",
+            success: function(data){
+                $("#zar").text(data);
+            }
+        })
+    })
+
+
+     $("#ciftZarAt").click(function(){
+
+        $.ajax({
+            type:"get",
+            url:"@Url.Action("CiftZar","Rastgele")",
+            success: function(data){
+               $("#ciftZarlar").text(data.join("-"))
+            }
+        })
+    })
+</script>
+}

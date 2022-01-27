@@ -1,0 +1,18 @@
+﻿@model HavaViewModel
+
+<div class="hava-durumu">
+    <div class=row>
+        <div class="col hava-sol">
+            <div class="hava-durumu-location">@Model.Yer</div>
+            <div class="hava-durumu-sicaklik">@Model.Sicaklik °C</div>
+        </div>
+        <div class="col">
+            <div class="hava-durumu-resim">
+                <img src="https://openweathermap.org/img/wn/@(Model.Resim)@@2x.png" alt="" />
+            </div>
+            <div class="hava-durumu-aciklama">
+                @Model.Aciklama
+            </div>
+        </div>
+    </div>
+</div>
