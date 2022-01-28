@@ -1,0 +1,81 @@
+﻿@model Person
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form method="post" id="personContact">
+
+    <div class="row">
+        <div class="col-md-6 pt-3 pb-5 border bg-secondary rounded">
+            <h5 class="text-light">Kişisel Bilgileriniz: </h5>
+            <hr />
+            <div class="form-group">
+                <input id="name" type="text" class="form-control" placeholder="Adınız:" />
+             
+            </div>
+            <div class="form-group">
+                <input id="lastName" type="text" class="form-control" placeholder="Soyadınız:" />
+            </div>
+            <div class="form-group d-flex align-items-center">
+                <label class="text-light col-md-3 p-0 m-0">Dogum Tarihiniz:</label>
+                <input class="col-md-9 form-control" id="birthDate" type="date"  />
+            </div>
+            <div class="form-group">
+                <input id="image" type="text" class="form-control" placeholder="Resim Linkiniz"/>
+            </div>
+            <div class="form-group">
+                <input id="url"  type="text" class="form-control" placeholder="İletişim Adresiniz(linkedin,github)"/>
+            </div>
+
+            <button type="submit" class="btn btn-success float-right">Gönder</button>
+        </div>
+
+        <div class="col-md-6">
+            <div class="profile-card-2">
+                <img id="imgPerson" src=""
+                     class="img img-responsive">
+                <div id="nameSurname" class="profile-name text-uppercase"></div>
+                <div class="profile-birthdate" id="bday"><p></p></div>
+                <div id="" class="profile-icons">
+                    <a id="urlLink" target="_blank" href=""><i class="fa fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<hr />
+<label class="d-block font-weight-bold" for="#jsonResult">JSON is here:</label>
+<textarea class="form-control font-weight-bold" cols="40" rows="9" id="jsonResult" readonly></textarea>
+
+
+@section Scripts{
+<script>
+    $("#personContact").submit(function(e){
+        var person = {
+            firstName:$("#name").val(),
+            lastName:$("#lastName").val(),
+            birthDate:$("#birthDate").val(),
+            imageLink: $("#image").val(),
+            URL: $("#url").val()
+        };
+        $.ajax({
+
+            type:"POST",
+            url:"@Url.Action("CreateJSON","Home")",
+            data: person,
+            success: function(data){
+                const result = JSON.stringify(data,null,4);
+
+                $("#jsonResult").text(result);
+                $("#nameSurname").text(`${data.firstName} ${data.lastName}`);
+                $("#bday").text(moment(data.birthDate).format('DD/MM/YYYY'));
+                $("#urlLink").attr("href",data.url);
+                $("#imgPerson").attr("src",data.imageLink);
+            }
+        })
+        e.preventDefault();
+    })
+
+</script>
+}

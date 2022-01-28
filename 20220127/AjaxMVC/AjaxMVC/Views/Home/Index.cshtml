@@ -9,20 +9,23 @@
 <hr />
 
 
-<form itemid="frmHava">
+<form id="havaFormu">
     <div class="row">
         <div class="col">
             <div class="form-group">
                 <label for="sehirAd">Şehir Adı:</label>
                 <input type="text" id="sehirAd" class="form-control w-50" required />
             </div>
-            <button class="btn btn-primary" >Hava Durumunu Öğren</button>
+            <button class="btn btn-primary">Hava Durumunu Öğren</button>
         </div>
-        <div class="col">
+        <div class="col" id="havaDurumu">
         </div>
     </div>
 </form>
-<br /><br />
+
+
+<br />
+<br />
 <button id="btnZarAt">Zar At</button> Gelen Zar:<span id="zar"></span>
 <br />
 <br />
@@ -30,6 +33,23 @@
 
 @section Scripts{
 <script>
+
+     $("#havaFormu").submit(function(e){
+
+         e.preventDefault();
+          var sehirAd = document.getElementById("sehirAd").value;
+           
+          $.ajax({
+            type:"post",
+            url:"@Url.Action("Getir","HavaDurumu")",
+            data: {yer: sehirAd},
+            success: function(data){
+                 $("#havaDurumu").html(data);
+            }
+        })
+    })
+
+
     $("#btnZarAt").click(function(){
 
         $.ajax({
