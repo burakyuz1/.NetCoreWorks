@@ -1,0 +1,12 @@
+﻿@model Sehir
+
+@{
+    ViewData["Title"] = Model.SehirAd + " Hakkinda Bilgi";
+}
+
+
+<h1>@Model.SehirAd</h1>
+
+<p>Plaka No : @Model.Id</p>
+<p>Nüfus : @Model.Nufus</p>
+<p>Bolge : @Model.Bolge.BolgeAd</p>
