@@ -1,0 +1,46 @@
+﻿@model BolgeSehirViewModel
+
+@{
+    ViewData["Title"] = "Sehirler";
+}
+
+<div class="d-flex justify-content-between">
+
+
+        <div style="width:468px; margin-top: 2rem">
+            <div class="component--filter">
+                <form method="get">
+                    <ul>
+                        <li>
+                            <div class="key">Bölge Seç:</div>
+                            <div class="value">
+
+
+                                <select asp-for="@Model.BolgeId" asp-items="@Model.Bolgeler">
+                                    <option>Tümü</option>
+
+                                </select>
+
+                            </div>
+                        </li>
+
+                        <li class="filter-button">
+                            <a href="#">İptal</a>
+                            <button type="submit">Sehirleri Getir</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    
+
+ 
+        <div style="width: 577px; margin-top: 2rem" class="text-center ml-4 ">
+            <div class="component--search">
+
+                <sehirler sehir-items="@Model.Sehirler"></sehirler>
+
+            </div>
+        </div>
+
+</div>
