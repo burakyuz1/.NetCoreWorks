@@ -1,0 +1,36 @@
+﻿@model List<Sehir>
+@{
+    ViewData["Title"] = "Sehirler";
+}
+
+<table id="sehirler" class="table table-bordered">
+    <thead>
+        <tr>
+
+            <th>Plaka NO</th>
+            <th>Ad</th>
+            <th>Nüfus</th>
+            <th>Bölge</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.SehirAd</td>
+                <td>@item.Nufus</td>
+                <td>@item.Bolge.BolgeAd</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+<script>
+            $(document).ready( function () {
+        $('#sehirler').DataTable();
+    } );
+</script>
+}

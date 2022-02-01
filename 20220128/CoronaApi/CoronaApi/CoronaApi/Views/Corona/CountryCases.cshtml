@@ -1,0 +1,36 @@
+﻿<input value="Turkey" type="text" id="countryName" />
+<input type="date" id="choosenDate" />
+<button id="getCountryCase" class="btn btn-success btn-sm">Get</button>
+
+<div id="result">
+
+    @*Partial gelecek*@
+</div>
+
+
+@section Scripts{
+
+<script>
+    $("#getCountryCase").click(function(event){
+    
+        const countryName = $("#countryName").val();
+        const choosenDate = $("#choosenDate").val();
+
+        $.ajax({
+            type:"POST",
+            url:"@Url.Action("CountryCases","Corona")",
+            data: {cn:countryName,dt:choosenDate},
+            success: function(data){
+                $("#result").html(data);
+            }
+        })
+        event.preventDefault();
+    })
+
+
+
+</script>
+
+
+
+}

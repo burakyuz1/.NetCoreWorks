@@ -1,0 +1,32 @@
+﻿<a asp-action="Add" >YENİ MÜSTERİ EKLE</a>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Müşteri Adi</th>
+            <th>Müşteri Soyadi</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Haydar</td>
+            <td>Çakır</td>
+            <td>
+                <a asp-controller="Customer" asp-action="Update" asp-route-id="1">Bilgileri Guncelle</a>
+                <a asp-controller="Customer" asp-action="Delete" asp-route-id="1">Sil</a>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Rıdvan</td>
+            <td>Öz</td>
+            <td>
+                <a asp-controller="Customer" asp-action="Update" asp-route-id="2">Bilgileri Guncelle</a>
+                <a asp-controller="Customer" asp-action="Delete" asp-route-id="2">Sil</a>
+
+            </td>
+        </tr>
+    </tbody>
+</table>

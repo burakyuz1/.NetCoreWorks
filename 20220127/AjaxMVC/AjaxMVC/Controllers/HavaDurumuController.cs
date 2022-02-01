@@ -17,6 +17,7 @@ namespace AjaxMVC.Controllers
             {
                 return BadRequest();
             }
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/");
@@ -26,7 +27,9 @@ namespace AjaxMVC.Controllers
                 if (result.IsSuccessStatusCode)
                 {
                     var data = await result.Content.ReadAsStringAsync();
-                    dynamic durum = JsonSerializer.Deserialize<ExpandoObject>(data);
+                    dynamic durum = JsonSerializer.Deserialize<ExpandoObject>(data); //NEWTONSOFT
+
+
                     havaViewModel = new HavaViewModel()
                     {
                         Yer = durum.name.GetString(),

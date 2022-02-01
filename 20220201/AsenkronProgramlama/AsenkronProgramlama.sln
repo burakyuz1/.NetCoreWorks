@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsenkronProgramlama", "AsenkronProgramlama\AsenkronProgramlama.csproj", "{591ABA5A-D5D9-47F4-8C3F-7A7835965710}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiThreading", "MultiThreading\MultiThreading.csproj", "{4AD59C6D-0C2E-4D0A-8240-F0D96BE95B6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{591ABA5A-D5D9-47F4-8C3F-7A7835965710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{591ABA5A-D5D9-47F4-8C3F-7A7835965710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{591ABA5A-D5D9-47F4-8C3F-7A7835965710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{591ABA5A-D5D9-47F4-8C3F-7A7835965710}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AD59C6D-0C2E-4D0A-8240-F0D96BE95B6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AD59C6D-0C2E-4D0A-8240-F0D96BE95B6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AD59C6D-0C2E-4D0A-8240-F0D96BE95B6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AD59C6D-0C2E-4D0A-8240-F0D96BE95B6F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11DAFE9E-F9C1-4388-ABB3-E4B336430ACA}
+	EndGlobalSection
+EndGlobal
