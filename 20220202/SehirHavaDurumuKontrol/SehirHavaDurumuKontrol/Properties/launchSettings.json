@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:24746",
-      "sslPort": 44336
+      "applicationUrl": "http://localhost:9178",
+      "sslPort": 44312
     }
   },
   "profiles": {
@@ -16,7 +16,7 @@
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
       }
     },
-    "Kamyoncum": {
+    "SehirHavaDurumuKontrol": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

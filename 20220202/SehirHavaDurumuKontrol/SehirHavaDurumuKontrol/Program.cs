@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Kamyoncum
+namespace SehirHavaDurumuKontrol
 {
     public class Program
     {
