@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+
+<form method="post">
+    <input type="text" value="" name="ad" id="" />
+    <button>bas</button>
+</form>
+
+
+@if (ViewBag.Ad != null)
+{
+     <h2>Merhaba @ViewBag.Ad</h2>
+}
+
+
+<hr />
+<h1>NOT DEFTERI</h1>
+
+
+<form asp-action="Kaydet" asp-controller="Mesaj" method="post">
+   <textarea rows="5" typeof="text" name="mesaj" value="" placeholder="notunuz">@Context.Session.GetString("mesaj")</textarea>
+    <button>KAYDET</button>
+</form>

@@ -1,0 +1,26 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1> CACHING </h1>
+
+
+ @*5 Saniye boyunca aynı zamanı verir. bu caching bilgisayarın depo alanında tutulur. *@
+<cache expires-after="TimeSpan.FromSeconds(5)">
+
+
+    <p>Zaman: @DateTime.Now</p> 
+    @for (var i = 1; i <= 5; i++)
+    {
+       @(new string('*',i) + "\n")
+
+    }
+
+</cache>
+
+
+<h1> MEMORY  CACHE SERVİSİ İLE ÖNBELLEĞE ALINAN SAAT </h1>
+
+
+<p>@Model</p>
