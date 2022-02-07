@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string navText = "";
+    bool logStatus;
+    if (Context.Session.GetObject<User>("user") != null)
+    {
+        navText = "WELCOME ! " + Context.Session.GetObject<User>("user").UserName;
+        logStatus = true;
+    }
+    else
+    {
+        logStatus = false;
+    }
+
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,6 +39,11 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+                    <div>
+                        @navText
+                        <a class="btn btn-primary@(logStatus ? " invisible" : " visible")" asp-action="Index" asp-controller="Login">Login</a>
+                        <a class="btn btn-danger@(logStatus ? " visible" : " invisible") " asp-action="Exit" asp-controller="Login">Logout</a>
+                    </div>
                 </div>
             </div>
         </nav>

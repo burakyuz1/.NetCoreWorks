@@ -1,24 +1,23 @@
-﻿
+﻿@model User
 <h2 class="text-center">Login Page</h2>
 <hr />
-<form>
+<form method="post">
     <div class="d-flex justify-content-center align-items-center">
         <div style="width:400px; background-color: #ccc; padding: 30px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
             <div class="form-group">
                 <label>User Name</label>
-                <input class="form-control" type="text" />
-
+                <input asp-for="UserName" class="form-control" type="text" />
+                <span asp-validation-for="UserName"></span>
 
             </div>
             <label>Password</label>
             <div class="form-group">
-                <input class="form-control" type="text" />
-
+                <input asp-for="Password" class="form-control" type="password" />
+                <span asp-validation-for="Password"></span>
 
             </div>
 
             <button class="btn btn-primary">Log In</button>
-
         </div>
 
     </div>
