@@ -9,6 +9,7 @@ namespace BizimMarket.Models
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }
         public string ProductImage { get; set; }
+        [Required]
         public int? CategoryId { get; set; }
         public Category Category { get; set; }
     }

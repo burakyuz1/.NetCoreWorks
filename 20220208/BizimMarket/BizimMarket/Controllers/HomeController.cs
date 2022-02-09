@@ -1,4 +1,5 @@
-﻿using BizimMarket.Context;
+﻿using System;
+using BizimMarket.Context;
 using BizimMarket.Models;
 using BizimMarket.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace BizimMarket.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly BizimMarketContext _db;
-
+        
         public HomeController(ILogger<HomeController> logger, BizimMarketContext db)
         {
             _logger = logger;
