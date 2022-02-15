@@ -57,6 +57,9 @@ namespace BizimMarket.Areas.Admin.Controllers
 
             return KategorileriYukle();
         }
+
+
+
         public IActionResult Duzenle(int id)
         {
             var urun = _db.Urunler.Find(id);

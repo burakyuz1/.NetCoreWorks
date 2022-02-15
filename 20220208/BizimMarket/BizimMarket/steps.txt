@@ -1,0 +1,36 @@
+﻿1/ Yuklenecek bir input oluşturulmalı. type'ı file olmalı
+2/ post edilecek formun enctype="multipart/form-data" olmalı
+3/ eğer db kullanılıyorsa bir viewModel oluşturulmalı çünkü db fotoğrafı değil fotoğrafın yolunu tutabilir
+4/ oluşturulan viewmodel'de image ın tipi : IFormFile
+5/ Resim kaydederken:
+	a. IWebHostEnvironment Enjekte edilmeli. Çünkü bana kök dizini verecek olan bu.
+	b. dosya adını: Guid + Path.GetExtension(resim.fileName)
+	c. dosyanın kaydedileceği yer : (Eleman dosyayı yüklediğinde sonuç olarak benim bir yerde tutmam lazım? ) Path.Combine(environment.webrootpath, "img","img subfolder","olusturulanDosyaadi")
+	d. FileStream açıp Kaydedilecek yolu ve fileMode.Create yapacağımızı belirtiyoruz.
+	e. Olusturduğumuz file stream'ı modelin CopyTo methodunu kullanarak basıyoruz
+	ONEMLI NOT: FileStream kapanması gereken bir dalgadır. Using kullanman icap eder.
+
+
+
+CUSTOM ATTRIBUTE YARATMA
+1/ ValidationAttribute sınıfından miras alıyoruz
+2/ Eğer eklemek istersen property olarak Parametre gecebiliyoruz.
+3/ IsValid methodunu override ediyoruz.
+3.5/ null ise true döndürebilirsin. Amac null check değil çünkü
+4/ Object turunde gelen dosyayı IFormFile'a (Unboxing)
+5/ eğer ContentType'ı image/ ile başlamıyorsa false döndürüp ErrorMesage propertysine "Geçersiz resim dosyası"
+6/ eğer Length i Paramatre olarak aldığımız length'ten büyükse error mesage ve return type
+
+
+
+Resmi duzenlemek icin controller'dan view'a yollama.
+1/Oncelikle yeni bir viewmodel'a ihtiyacımız var. Çünkü mevcut viewmodel bizi kurtarmaz. (Controllerdan view'a dosya yolu atılır. View'dan controller'a dosyanın kendisi IFormFile şeklinde yollanır. )
+2/ Controller tarafında GET islemiyle model yollanır.
+3/ View tarafında yakalanır. Post yollanır . Controller'da yakalanır.
+4/ Düzenlenen ürün db den bulunur ve gelen modeldeki verilerle guncellenir. 
+5/ ONEMLI NOT: Sen view'a buradan fotoğraf yollayamazsın. mümkün değil. View'a sadece DOSYANIN YOLUNU yollarsın. Kısaca IFormFile empty gider.
+			    Dolayısıyla EMPTY giden form file ı controller'a geri döneceğimiz için. eğer user bir fotoğraf seçmediyse o hala NULL kalacaktır. 
+				Bu yüzden Controller'da eğer NULL olarak geldiyse kullanıcı herhangi bir değişiklik yapmamıştır. MEVCUT FOTOĞRAFINI KULLANMAYA DEVAM EDECEKTIR
+				Şayet bir fotoğraf seçerse artık O FOTOĞRAFI MEVCUT STREAM'DEN SİLİP, YERİNE DB DEN GELEN YENİ RESMİ YÜKLEMEN GEREKİR!!!!!!!!!!!!!
+
+

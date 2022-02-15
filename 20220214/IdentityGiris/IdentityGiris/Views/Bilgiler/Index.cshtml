@@ -1,0 +1,14 @@
+﻿@using System.Security.Claims
+@{ 
+    ViewData["Title"] = "giriş yapan üyenin bilgileri";
+}
+
+<h1>Bilgiler</h1>
+
+<p>aşağıda authentication cookie ile taşınan üye ile ilgili claim'lere ait değerleri görecekseniz</p>
+
+<ul class="list-group">
+    <li class="list-group-item">User ID:  @User.FindFirstValue(ClaimTypes.NameIdentifier)</li>
+    <li class="list-group-item">User Name: @User.Identity.Name</li>
+    <li class="list-group-item">Display Name: @User.FindFirstValue("DisplayName")</li>
+</ul>
