@@ -1,0 +1,16 @@
+﻿@page
+@model RazorPages.Pages.AboutModel
+@{
+    ViewData["Title"] = "About Me";
+}
+
+
+<h1>ABOUT ME</h1>
+
+
+<ul>
+    <li>Name: @Model.Info.Name </li>
+    <li>Surname: @Model.Info.Surname</li>
+    <li>Age: @Model.Info.Age</li>
+    <li>Favourite Color: @Model.Info.FavouriteColor</li>
+</ul>

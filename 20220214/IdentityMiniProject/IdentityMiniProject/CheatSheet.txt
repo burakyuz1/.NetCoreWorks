@@ -1,0 +1,18 @@
+﻿* Appsettings'ten ilgili alanlar değiştirilir.
+* Program başlamadan seed işlemi vs. gerekliyse. Program.cs iceresinde. Host ve Run arasına using scopeu açılarak işe başlanır.
+* using içerisine bir tane host.Services.CreateScope oluşturulur. Bir tane service provider elde etmiş olursun.
+* user manager icin : servisleri açmam lazım. onu da user manager generic classını kullanarak yapıyorum. GetRequiredService metoduyla.
+* Aynısını rol isteniyorsa yapılır.
+
+* Rol oluşturmak isteniliyorsa roleManager'ın CreateAsync metodu takip edilir. (Aynı zamanda startup.cs'e AddRoles modülü eklenir.)
+* User oluşturulmak isteniyorsa da IdentityUser newlenir. Bu da zaten DB'deki DotNetUsers alanına tekabül ettiği eder. Oonların column'larını kullanacağız. [User'a password atamak icin userManager nesnesinin createAsync metodunu kullanıyoruz.]
+
+* user'ı rollemek icin de AddToRoleAsync metotunu userManageri cagirarak veriyoruz.
+
+#### Mevcut IdentityUser'ı Nasıl Customize ederim? ####
+
+*ApplicationUser Classı oluşturup IdentityUser'dan kalıtım alırız.
+*IdentityUser'ı kullanan her yeri ApplicationUser olarak degistiririz.
+	1)Login  page
+	2)Logout Page
+	3)Register Page
