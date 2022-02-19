@@ -9,10 +9,29 @@
 
 * user'ı rollemek icin de AddToRoleAsync metotunu userManageri cagirarak veriyoruz.
 
-#### Mevcut IdentityUser'ı Nasıl Customize ederim? ####
 
+
+
+KAYNAK: https://www.tektutorialshub.com/asp-net-core/add-custom-fields-to-user-in-asp-net-core-identity/
+SORUN : #### Mevcut IdentityUser'ı Nasıl Customize ederim? ####
 *ApplicationUser Classı oluşturup IdentityUser'dan kalıtım alırız.
 *IdentityUser'ı kullanan her yeri ApplicationUser olarak degistiririz.
 	1)Login  page
 	2)Logout Page
-	3)Register Page
+	3)Register Page [Input model nested classının içine custom olarak ekleyeceğimiz propları yazıyoruz.// ONPOST methodunda ApplicationUserın instance'ını alırken, yeni eklediğimiz custom alanları da eklemesini istiyoruz.]
+	4)View'da gerekli alanları oluşturup Input.(customPropName) şeklinde asp-for'larını tanıtıyoruz.
+
+
+
+KAYNAK : https://docs.microsoft.com/en-us/aspnet/core/security/authentication/add-user-data?view=aspnetcore-5.0&tabs=visual-studio
+SORUN: ####yukarıda user nesnesine eklenen yeni alanları nasıl kullanırım ####
+
+* LoadAsync metodu ne işe yarar? : çektiğimiz modelin içindeki veriyi ilgili alana basar.
+* Bunun için öncelikle Input Nested Class içine YeniXXX diye propertylerimizi oluşturuyoruz.
+* Ardından LoadAsync içerisinde parametre olarak geçilen user içinden bilgileri alıp Input nesnesinin içinde tanımlıyoruz. Bu sayede kullanıcı kendi extra eklediği bilgileri UI tarafında görebilecek
+[Tabi bunun için view tarafında da ilgili alanları asp-for olarak tanımlamamız gerekir]
+* Ardından OnPost metoduna gidilir. parametre olarak gecilen userin ilgili alanları inputtan gelenlerle güncellenir
+* usermanagerin updateasync methodunu kullanarak takip edilen nesne güncellenir.
+
+
+RESIM EKLEME

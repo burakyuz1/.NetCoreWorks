@@ -1,0 +1,8 @@
+Güncellemeler:
+
+- User kayıt olurken custom olarak Ad-Soyad girebiliyor, profilinden güncelleyebiliyor.
+- User custom olarak fotoğraf ekleyebiliyor. eklediği fotoğrafı güncelleyebiliyor veya silibiliyor.
+- User resim seçmezse default bir resim atanıyor.
+- Resim boyutu sınırlaması için custom attribute yazıldı.
+- Layoutta kullanıcının girdiği ad/soyad bilgisi yer alıyor.
+- Eklediği/sildiği resimler preview ediliyor.

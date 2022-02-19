@@ -10,8 +10,9 @@ namespace IdentityMiniProject.Data
     public class ApplicationUser : IdentityUser
     {
         [Required]
-        public string Ad { get; set; }
+        public string Name { get; set; }
         [Required]
-        public string Soyad { get; set; }
+        public string Surname { get; set; }
+        public string ImagePath { get; set; }
     }
 }

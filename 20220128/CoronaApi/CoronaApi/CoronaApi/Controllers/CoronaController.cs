@@ -1,18 +1,27 @@
 ﻿using CoronaApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CoronaApi.Controllers
 {
     public class CoronaController : Controller
     {
-        public async Task<IActionResult> AllCountries() //table
+        private readonly IMemoryCache _memoryCache;
+
+        public CoronaController(IMemoryCache memoryCache)
+        {
+            _memoryCache = memoryCache;
+        }
+        public async Task<IActionResult> AllCountries()
         {
             List<CoronaViewModel> cases = new List<CoronaViewModel>();
 
@@ -21,8 +30,13 @@ namespace CoronaApi.Controllers
             {
                 client.BaseAddress = new Uri("https://covid-api.mmediagroup.fr");
 
-                var request = await client.GetAsync("/v1/cases");
+                HttpResponseMessage request;
 
+                if (!_memoryCache.TryGetValue("request", out request))
+                {
+                    request = await client.GetAsync("/v1/cases");
+                    _memoryCache.Set("request", request, DateTimeOffset.Now.AddDays(1));
+                }
                 if (request.IsSuccessStatusCode)
                 {
                     var jsonData = await request.Content.ReadAsStringAsync();
@@ -55,9 +69,25 @@ namespace CoronaApi.Controllers
 
         }
 
-        public IActionResult CountryCases()
+        public async Task<IActionResult> CountryCases()
         {
-            return View();
+            List<SelectListItem> countries = new List<SelectListItem>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://covid-api.mmediagroup.fr");
+                var request = await client.GetAsync("/v1/cases");
+                if (request.IsSuccessStatusCode)
+                {
+                    var jsonData = await request.Content.ReadAsStringAsync();
+
+                    dynamic netData = JsonSerializer.Deserialize<ExpandoObject>(jsonData);
+                    foreach (var item in netData)
+                    {
+                        countries.Add(new SelectListItem() { Text = item.Key, Value = item.Key });
+                    }
+                }
+            }
+            return View(countries);
         }
 
 
@@ -75,26 +105,46 @@ namespace CoronaApi.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://covid-api.mmediagroup.fr");
-                var request = await client.GetAsync($"v1/history?country={cn}&status=confirmed");
-
-                if (request.IsSuccessStatusCode)
+                HttpResponseMessage requestConfirmed;
+                HttpResponseMessage requestDeath;
+                bool isConfirmExist = _memoryCache.TryGetValue("confirmed", out requestConfirmed);
+                bool isDeathExist = _memoryCache.TryGetValue("death", out requestDeath);
+                if (!isConfirmExist && !isDeathExist)
                 {
-                    var jsonData = await request.Content.ReadAsStringAsync();
-                    dynamic netData = JsonSerializer.Deserialize<ExpandoObject>(jsonData);
+                    requestConfirmed = await client.GetAsync($"v1/history?country={cn}&status=confirmed");
+                    requestDeath = await client.GetAsync($"v1/history?country={cn}&status=deaths");
+                    _memoryCache.Set("confirmed", requestConfirmed, DateTimeOffset.Now.AddDays(1));
+                    _memoryCache.Set("death", requestDeath, DateTimeOffset.Now.AddDays(1));
+                }
 
-                    int currentCase = (int)netData.All.GetProperty("dates").GetProperty(formettedDateTime).GetDecimal();
-                    int previousCase = (int)netData.All.GetProperty("dates").GetProperty(previousDay).GetDecimal();
+                if (requestConfirmed.IsSuccessStatusCode && requestDeath.IsSuccessStatusCode)
+                {
+                    var jsonDataConfirmed = await requestConfirmed.Content.ReadAsStringAsync();
+                    var jsonDataDeaths = await requestDeath.Content.ReadAsStringAsync();
+
+                    dynamic netDataConfirmed = JsonSerializer.Deserialize<ExpandoObject>(jsonDataConfirmed);
+                    dynamic netDataDeaths = JsonSerializer.Deserialize<ExpandoObject>(jsonDataDeaths);
+
+
+                    int population = (int)netDataConfirmed.All.GetProperty("population").GetDecimal();
+
+                    int currentDeath = (int)netDataDeaths.All.GetProperty("dates").GetProperty(formettedDateTime).GetDecimal();
+                    int previousDeath = (int)netDataDeaths.All.GetProperty("dates").GetProperty(previousDay).GetDecimal();
+                    int dailyDeath = currentDeath - previousDeath;
+
+                    int currentCase = (int)netDataConfirmed.All.GetProperty("dates").GetProperty(formettedDateTime).GetDecimal();
+                    int previousCase = (int)netDataConfirmed.All.GetProperty("dates").GetProperty(previousDay).GetDecimal();
                     int dailyCase = currentCase - previousCase;
 
-
-                    CoronaViewModel corona = new CoronaViewModel()
+                    CountryCaseViewModel vm = new CountryCaseViewModel()
                     {
                         CountryName = cn,
-                        TotalCases = dailyCase
+                        Death = dailyDeath,
+                        Confirmed = dailyCase,
+                        Population = population
                     };
 
-
-                    return PartialView("_ConfirmedPartial", corona);
+                    return PartialView("_CountryCasesPartial", vm);
                 }
 
             }

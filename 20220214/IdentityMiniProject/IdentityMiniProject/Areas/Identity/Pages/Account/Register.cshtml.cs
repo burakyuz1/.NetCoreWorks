@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using IdentityMiniProject.Attributes;
 using IdentityMiniProject.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using IdentityMiniProject.Data;
 
 namespace IdentityMiniProject.Areas.Identity.Pages.Account
 {
@@ -25,17 +28,20 @@ namespace IdentityMiniProject.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IWebHostEnvironment _env;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IWebHostEnvironment env)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _env = env;
         }
 
         [BindProperty]
@@ -48,10 +54,14 @@ namespace IdentityMiniProject.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            public string Ad { get; set; }
+            public string Name { get; set; }
             [Required]
-            public string Soyad { get; set; }
+            public string Surname { get; set; }
 
+            public string ImagePath { get; set; }
+
+            [ValidImage(ImageSize = 2)]
+            public IFormFile Image { get; set; }
 
             [Required]
             [EmailAddress]
@@ -82,7 +92,23 @@ namespace IdentityMiniProject.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, Ad= Input.Ad ,  Soyad = Input.Soyad };
+                string imageLocation;
+                if (Input.Image == null)
+                {
+                    imageLocation = "default.png";
+                }
+                else
+                {
+                    imageLocation = Guid.NewGuid() + Path.GetExtension(Input.Image.FileName);
+                    string imageDestinationPath = Path.Combine(_env.WebRootPath, "img", imageLocation);
+                    using (var fs = new FileStream(imageDestinationPath, FileMode.Create))
+                    {
+                        Input.Image.CopyTo(fs);
+                    }
+                }
+
+
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, Name = Input.Name, Surname = Input.Surname, ImagePath = imageLocation };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
