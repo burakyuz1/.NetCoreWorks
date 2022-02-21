@@ -1,0 +1,32 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+
+ul.to-do-list li{
+    display:flex;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    padding: 1rem .4rem;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    cursor:pointer;
+}
+
+
+
+ul.to-do-list li:nth-child(even){
+   background-color: #e5e5dc;
+}
+ul.to-do-list li:nth-child(odd){
+    background-color: #6c787e;
+    color: #fff;
+ }
+
+ul.to-do-list li> button{
+    margin-left: auto;
+}
+
+ul.to-do-list  > li> span{
+    margin-left: .3rem;
+}
