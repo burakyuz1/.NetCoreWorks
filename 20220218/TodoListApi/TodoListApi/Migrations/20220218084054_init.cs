@@ -6,6 +6,8 @@ namespace TodoListApi.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            //        
+
             migrationBuilder.CreateTable(
                 name: "ToDoItems",
                 columns: table => new

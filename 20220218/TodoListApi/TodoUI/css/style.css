@@ -30,3 +30,8 @@ ul.to-do-list li> button{
 ul.to-do-list  > li> span{
     margin-left: .3rem;
 }
+
+
+ul.to-do-list > li.done > span{
+    text-decoration: line-through;
+}

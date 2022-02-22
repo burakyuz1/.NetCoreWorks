@@ -81,8 +81,7 @@ namespace TodoListApi.Controllers
             _context.ToDoItems.Add(toDoItem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetToDoItem", new { id = toDoItem.Id }, toDoItem);  //Header'a location ekler. Bunu return ToDoItem olarak da döndürebilirdik ama location boş kalırdı.
-                                                                                        //Rest prensibine uygundur.
+            return CreatedAtAction("GetToDoItem", new { id = toDoItem.Id }, toDoItem);
         }
 
         // DELETE: api/ToDoItems/5

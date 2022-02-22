@@ -1,4 +1,5 @@
 ﻿using IdentityMiniProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -23,10 +24,12 @@ namespace IdentityMiniProject.Controllers
             return View();
         }
 
+        [Authorize(Roles ="admin")]
         public IActionResult Privacy()
         {
             return View();
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
