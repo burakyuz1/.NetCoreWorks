@@ -1,0 +1,25 @@
+1. Services klasörü
+2. Ýçine EmailSender Classý
+3. IEmailSender interface'i implemente eder
+4. Implemente edilir.
+
+
+Smtpclient client = new SmtpClient("mail.kod.fun", 587)
+
+client.EnableSsl = true;
+client.Credentials = new NetworkCredential("kendiMailin.com","þifren");
+MailMessage mail = new MailMessage("",dolacak)
+
+await client.SendMailAsync(mail);
+
+DI Injection'ý yap.
+
+Makale.
+
+https://docs.microsoft.com/en-us/aspnet/core/security/authentication/accconfirm?view=aspnetcore-5.0&tabs=visual-studio#feedback
+
+
+API ILE ILGILI ARASTIRILACAKLAR...
+
+RESTful 
+
