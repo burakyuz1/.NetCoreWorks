@@ -12,5 +12,6 @@ namespace IdentityMiniProject.Data
             : base(options)
         {
         }
+        
     }
 }

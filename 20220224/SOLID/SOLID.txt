@@ -1,0 +1,46 @@
+* Single Responsibility = (TEK SORUMLULUK) bir class sadece bir amaca hizmet etmeli.
+			  Bir sınıfta CalculatePay() ve SaveEmployee() olamaz. Çünkü 			  birisi iş yaparken birisi kayıt yapıyor.
+		          NASIL ÇÖZERİZ? CalculatePay() için Employee Class'ı
+				         SaveEmployee() için EmployeeStorage Class'ı
+
+			 [SLAP] Single Level of Abstraction Principle
+				METOTLARINI SURDURULEBİLİR SEKİLDE ORGANIZE ET.
+				METOTLARIN SADECE 1 İŞ YAPMALI.
+
+* Open-Closed = Sınıfların gelişime açık, değişime kapalı olmalıdır. 
+		BUTTON classının herhangi bir özelliği 20 yıldır aynı.
+		Değiştirirsen eski projelerdeki tüm propertyler değişir. DEĞİŞİME 			KAPATILMALI.
+		Class'ı miras alıp geliştirmelisin. Mevcut sistemi değiştirmemelisin.
+
+		PaymentManager Classında Pay Metodu olduğunu düşününelim. Pay metoduna 	        yeni bir özellik eklemek istediğimiz zaman problem yaşayabiliriz.
+
+		IPay interface'i oluşturursak içine de void Pay() oluşturursak.
+		Pay Methodunu da CashPayment(): IPay    CreditCartPayment(): IPay
+
+		Ya da base class'ı Abstract yapabiliriz.
+		
+		 
+* Liskov substitution 
+
+		EkmekYap(x) x bir un türünde değişkendir
+		EkmekYap(y) y bir Kepekli un türünde değişkendir
+		
+		KepekliUn : Un /// y : x
+		-- çocuk sınıflar miras aldıkları parent sınıf yerine kullanıldığı  zaman 		   sistemler çalışmaya devam edecek şekilde tasarlanmalıdır.
+
+		bir alt klass, üst klass yerine kullanıldığı zaman probleme sebep 		olmayacak şekilde davranmalıdır.
+
+* Inteface Segregation
+
+		kullanıcılar kullanmadıkları interfacelara bağlı olmak zorunda 		bırakılmamalı.
+
+		Örnek IKus diye interface var. İçinde uç, kanat çırp, uç var.
+		Penguen'e bu interface tanımlandığı zaman uç metodu çalışmaz.
+		Bu yüzden interfaceleri ayırmak lazım
+
+
+* Dep. Inversion = üst sınıf bir class, alt sınıf bir class'a bağımlı olmamalı. 
+		   Interface'a bağlı olmalı. Alt sınıfları da bu interface'e                                 bağlayarak bağımlılıkları tersine çevirmeliyiz.
+
+
+-> 
