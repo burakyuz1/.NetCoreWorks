@@ -1,0 +1,4 @@
+﻿1) Asp.NetCore.Authentication.JWTBareer nugetten projeye dahil edilir.
+2) Controller dışarıya kapanır. (Çünkü amacım verdiğim token ile girmek)
+3) JWT servisi ve managerları oluşturulur. Implemantasyonu yapılır.
+4) JWT Identity, Asp.NetCore.Authorization ve Authentication nuget indirilir.

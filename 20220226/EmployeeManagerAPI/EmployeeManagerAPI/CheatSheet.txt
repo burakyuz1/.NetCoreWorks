@@ -1,0 +1,49 @@
+﻿1) Personel Data tutmak icin bir ClassLib. oluştur.
+2) MongoDB icin gerekli nugetPackage kur. MongoDb.Driver
+3) Employee Adında modelini oluştur ve ID alanını BsonId attribute ver. (String verirsen BsonRepresentation vermen lazım ) (Eğer string vermiyorsan ObjectID ver)
+4) IEmployeeService ekle CRUD için
+5) EmployeeManager de yukarıdakini implement etsin. (DI eklemeyi unutma.)
+
+6) DB clientta 3 şey lazım. DatabaseName, CollectionName ve ConnectionString. 
+	Bunları EnvironmentVariables olarak tanımlamak daha mantıklı olur.
+	launchSettings.json -> Profiles ın altına DATABASE_NAME, COLLECTION_NAME, ve bunu apinin de altına yapıştırıyoruz.
+	Burada ConStr eklemedik. Connection Stringin icinde şifre tutulduğu için bunu secretfile olarak tutmalıyız. Çünkü GITHUB gibi VCS'lerde sorun yaratabilir.
+
+7) Secret Storage oluşturmak icin .
+	Package Manager
+	dotnet user-secrets init -p ProjeAdi
+	dotnet user-sercrets set "CONNECTION_STRING" "connstring e database name yaz" -p ProjeAdi Api
+	Başarılı olup olmadığını görmek için
+	dotnet user-secrets list -p ProjeAdi
+
+ 
+ 8) DBConfiguration için bir class oluşturmamız gerek. neden? DbContext elde etmek için.
+
+	launchSettings.json icine verdiğimiz 2 adet alanı ve connection string için 1 alanı buraya property olarak oluşturuyoruz
+	(NOT: launchSettings.json a verdiğin isimler ile aynı olmalı.)
+	launchsettings'e verdiğimiz bu 2 alanın DbContext'e maplenmesi için services.Configure<DbContext>(Configuration) tanıtmamız lazım Startup.cs de
+
+9) IDbClient oluşturuyoruz. burada basit CRUD işlemlerinin yapılacağı mongo clienti için yazılacak kodların imzaları tutulur.
+	IMongoCollection<Employee> GetEmployeeCollection(); şeklinde employee listesini almak isteriz.
+
+
+10) DbClient : IDbClient bağlantısını yapıyoruz. Implement ediyoruz.
+	Oncelikle burada  db connectionStringe ihtiyacımız var. Onu da secretStorage da tuttuğumuz için almalıyız.
+	Bunun için Oncelikle Nuget Microsoft.Extensions.Options projemize ekliyoruz.
+	Ctor içinde bir tane IOptions<DbContext> çağırıyoruz. 
+	ardından MongoClient newleyip içine yukardaki options.Value.ConnectionString veriyoruz.
+	sonra bu client içinden GetDatabase(options.value.db_Name) alıyoruz.
+	collectionı almak için de generic olarak IMongoCollection tanımlayıp içine bir üst satırdaki database.GetCollection<Employee>(options.value.collectionName);
+
+	Implemete ile gelen classın içine return ediyoruz. Bu kadar :)
+	(NOT: DB CLIENT VE IDB CLIENT ARASINDAKİ DI YAPMAYI UNUTMA SINGLETON İLE OLUYOR DB TÜRÜNDEKİ)
+	
+	
+11) Ardından EmployeeManager icine gidip artık orada dbClient'ı CTOR'Da çağırabilirim. *****
+
+12) Oncelikle IEmployeeService içerisinde geriye List döndürmen lazım çünkü .net ortamında IMongoCollection bir anlam ifade etmez.
+	Sonra EmployeeManager Ctor'unda elinde bir employeeList tutman lazım. Cünkü crud islemleri o IMongoCollection içinde yapılır
+	ListAll  için --> employees.find(x=> true).ToList();
+	Add için employees.InsertOne(Employee);
+	Update icin replaceOne
+	Delete icin DeleteOne
